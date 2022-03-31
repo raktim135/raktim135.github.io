@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>NICSI Payment Calculator</title>
+  </head>
+  <body>
+	<div id="app">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-7  mt-5 mx-auto">
+          <h3 class="text-center">NICSI Payment Calculator</h3>
+        </div>
+        <div class="col-6 mx-auto bg-light border border-success mt-3">
+          <table class="table">
+            <tr>
+              <td class="fw-bold">Monthly In Hand Salery</td>
+              <td><input type="number" v-model="monthly_salery" class="w-50"></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Total Months</td>
+              <td><input type="number" v-model="total_months" class="w-50"></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Total Manpower</td>
+              <td><input type="number" v-model="total_manpower" class="w-50"></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Vendor Commission</td>
+              <td>
+                <select name="" id="" v-model="vendor_commission" class="w-50">
+                  <option value="7.9">7.9% (new)</option>
+                  <option value="4.39">4.39% (old)</option>
+                </select>
+              </td>
+            </tr>
+            <tr  class="fw-bold">
+              <td>Work Order Amount:</td>
+              <td>{{workOrderAmount}}</td>
+            </tr>
+            <tr  class="fw-bold">
+              <td>Total Amount:</td>
+              <td>{{totalAmount}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-7 mt-5 mx-auto">
+          <h3 class="text-center">NICSI Manpower Rate</h3>
+        </div>
+        <div class="col-10 mx-auto mt-3">
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (0 to less than 2 years relevant experience)</td>
+                <td>30,900</td>
+                <td>32,140</td>
+                <td>33,430</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (2 to less than 4 years relevant experience)</td>
+                <td>33,400</td>
+                <td>34,740</td>
+                <td>36,130</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (4 to less than 6 years relevant experience)</td>
+                <td>36,100</td>
+                <td>37,550</td>
+                <td>39,060</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (6 years & Above relevant experience)</td>
+                <td>39,000</td>
+                <td>40,560</td>
+                <td>42,190</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Senior Software Application Support Engineer 3 to less than 5 years relevant experience with Certification or 5 to less than 7 years relevant experience without Certification</td>
+                <td>45,500</td>
+                <td>47,320</td>
+                <td>49,220</td>
+              </tr>
+              <tr>
+                <td>Senior Software Application Support Engineer 5 to less than 7 years relevant experience with Certification or 7 to less than 9 years relevant experience without Certification</td>
+                <td>49,100</td>
+                <td>51,070</td>
+                <td>53,120</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Developers (0 to less than 2 years relevant experience)</td>
+                <td>33,400</td>
+                <td>34,740</td>
+                <td>36,130</td>
+              </tr>
+              <tr>
+                <td>Developers (2 to less than 4 years relevant experience)</td>
+                <td>36,100</td>
+                <td>37,550</td>
+                <td>39,060</td>
+              </tr>
+              <tr>
+                <td>Developers (4 to less than 6 years relevant experience)</td>
+                <td>39,000</td>
+                <td>40,560</td>
+                <td>42,190</td>
+              </tr>
+              <tr>
+                <td>Developers (6 years & Above relevant experience)</td>
+                <td>42,100</td>
+                <td>43,790</td>
+                <td>45,550</td>
+              </tr>
+              
+            </tbody>
+          </table>
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Senior Developers 3 to less than 5 years relevant experience with Certification or 5 to less than 7 years relevant experience without Certification</td>
+                <td>49,100</td>
+                <td>51,070</td>
+                <td>53,120</td>
+              </tr>
+              <tr>
+                <td>Senior Developers 5 to less than 7 years relevant experience with Certification or 7 to less than 9 years relevant experience without Certification</td>
+                <td>53,000</td>
+                <td>55,120</td>
+                <td>57,330</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+	</div>
+	<script>
+	  Vue.createApp({
+	    data() {
+	      return {
+	        monthly_salery: 37550,
+          total_months: 1,
+          total_manpower: 1,
+          workOrderAmount: 0,
+          vendor_commission: 7.9
+	      }
+	    },
+      computed: {
+        totalAmount(){
+          var a = this.monthly_salery + (this.monthly_salery * this.vendor_commission / 100);
+          var b = a + (a * 18 /100);
+          this.workOrderAmount = (Math.ceil(b * this.total_months*this.total_manpower)).toFixed(2);
+          var c = b + (b * 7 /100);
+          return (Math.ceil(c * this.total_months*this.total_manpower)).toFixed(2);
+        }
+      }
+	  }).mount('#app')
+	</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
