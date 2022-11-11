@@ -33,17 +33,21 @@
               <td class="fw-bold">Vendor Commission</td>
               <td>
                 <select name="" id="" v-model="vendor_commission" class="w-50">
-                  <option value="7.9">7.9% (new)</option>
-                  <option value="4.39">4.39% (old)</option>
+                  <option value="7.9">7.9% (Core)</option>
+                  <option value="4.39">4.39% (Support)</option>
                 </select>
               </td>
             </tr>
             <tr  class="fw-bold">
-              <td>Work Order Amount:</td>
+              <td>Monthly Rate:</td>
+              <td>{{monthlyRate}}</td>
+            </tr>
+            <tr  class="fw-bold">
+              <td>Work Order Total Amount:</td>
               <td>{{workOrderAmount}}</td>
             </tr>
             <tr  class="fw-bold">
-              <td>Total Amount:</td>
+              <td>PI Total Amount:</td>
               <td>{{totalAmount}}</td>
             </tr>
           </table>
@@ -178,11 +182,11 @@
 	  Vue.createApp({
 	    data() {
 	      return {
-	        monthly_salery: 37550,
+	        monthly_salery: 53120,
           total_months: 1,
           total_manpower: 1,
           workOrderAmount: 0,
-          vendor_commission: 7.9
+          vendor_commission: 4.39
 	      }
 	    },
       computed: {
@@ -192,6 +196,9 @@
           this.workOrderAmount = (Math.ceil(b * this.total_months*this.total_manpower)).toFixed(2);
           var c = b + (b * 7 /100);
           return (Math.ceil(c * this.total_months*this.total_manpower)).toFixed(2);
+        },
+        monthlyRate(){
+          return (this.monthly_salery+this.monthly_salery*this.vendor_commission/100).toFixed(2);
         }
       }
 	  }).mount('#app')
