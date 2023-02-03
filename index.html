@@ -12,19 +12,22 @@
 	<div id="app">
     <div class="container-fluid">
       <div class="row">
+        <h3 class="fw-bold text-center text-primary">NICSI Payment Calculator & Manpower Rates (Latest Empanelment - 4th Year)</h3>
+      </div>
+      <div class="row">
         <div class="col-md-7 mx-auto bg-light border border-success mt-3">
-          <h3 class="text-center">NICSI Payment Calculator (CTC to PI Amount)</h3>
+          <h3 class="text-center">CTC to PI Amount</h3>
           <table class="table">
             <tr>
-              <td class="fw-bold">Monthly In Hand Salery</td>
+              <td class="fw-bold">Monthly In Hand Salery (Rs.)</td>
               <td><input type="number" v-model="monthly_salery" class="w-50"></td>
             </tr>
             <tr>
-              <td class="fw-bold">Total Months</td>
+              <td class="fw-bold">Total No. of Months</td>
               <td><input type="number" v-model="total_months" class="w-50"></td>
             </tr>
             <tr>
-              <td class="fw-bold">Total Manpower</td>
+              <td class="fw-bold">Total No. of Manpowers</td>
               <td><input type="number" v-model="total_manpower" class="w-50"></td>
             </tr>
             <tr>
@@ -38,23 +41,23 @@
             </tr>
             <tr  class="fw-bold">
               <td>Monthly Empanneled Rate <span class="text-secondary">(+{{vendor_commission}}% vendor commission)</span>:</td>
-              <td>{{monthlyRate}}</td>
+              <td>Rs.{{formatIndianNumber(monthlyRate)}}</td>
             </tr>
             <tr  class="fw-bold">
               <td>Work Order Total Amount <span class="text-secondary">(+18% GST)</span>:</td>
-              <td>{{workOrderAmount}}</td>
+              <td>Rs.{{formatIndianNumber(workOrderAmount)}}</td>
             </tr>
             <tr  class="fw-bold">
               <td>PI Total Amount <span class="text-secondary">(+7% NICSI margin)</span>:</td>
-              <td>{{totalAmount}}</td>
+              <td>Rs.{{formatIndianNumber(totalAmount)}}</td>
             </tr>
           </table>
         </div>
         <div class="col-md-7 mx-auto bg-light border border-success mt-3">
-          <h3 class="text-center">NICSI Payment Calculator (Empanneled Rate to CTC)</h3>
+          <h3 class="text-center">Empanneled Rate to CTC</h3>
           <table class="table">
             <tr>
-              <td class="fw-bold">Monthly Empanneled Rate</td>
+              <td class="fw-bold">Monthly Empanneled Rate (Rs.)</td>
               <td><input type="number" v-model="empanneled_rate" class="w-50"></td>
             </tr>
             <tr>
@@ -68,7 +71,7 @@
             </tr>
             <tr  class="fw-bold">
               <td>CTC <span class="text-secondary">(-{{cal2_vendor_commission}}% vendor commission)</span>:</td>
-              <td>{{monthlyCtc}}</td>
+              <td>Rs.{{formatIndianNumber(monthlyCtc)}}</td>
             </tr>
           </table>
         </div>
@@ -76,7 +79,7 @@
 
       <div class="row">
         <div class="col-10 mt-5 mx-auto">
-          <h3 class="text-center">NICSI Manpower Rate (Updated)</h3>
+          <h3 class="text-center text-success">NICSI Manpower Rate (Updated)</h3>
         </div>
         <div class="col-10 mx-auto mt-3">
           <table class="table">
@@ -157,7 +160,7 @@
 
       <div class="row">
         <div class="col-10 mt-5 mx-auto">
-          <h3 class="text-center">NICSI Manpower Rate(Expired)</h3>
+          <h3 class="text-center text-danger">NICSI Manpower Rate(Expired)</h3>
         </div>
         <div class="col-10 mx-auto mt-3">
           <table class="table">
@@ -293,6 +296,16 @@
           empanneled_rate: 55451.97
 	      }
 	    },
+      methods: {
+        formatIndianNumber(number) {
+            var str = number.toString();
+            str = str.split(".");
+            return (
+                str[0].replace(/(\d)(?=(\d\d)+\d$)/g, "$1,") +
+                (str[1] ? "." + str[1] : "")
+            );
+        },
+      },
       computed: {
         totalAmount(){
           var a = this.monthly_salery + (this.monthly_salery * this.vendor_commission / 100);
