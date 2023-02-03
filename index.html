@@ -305,7 +305,7 @@
           return (this.monthly_salery+this.monthly_salery*this.vendor_commission/100).toFixed(2);
         },
         monthlyCtc(){
-          return (100*this.empanneled_rate/(100+this.cal2_vendor_commission)).toFixed(2)
+          return ((100*this.empanneled_rate)/(100+(this.cal2_vendor_commission*1))).toFixed(2)
         }
       }
 	  }).mount('#app')
