@@ -12,10 +12,8 @@
 	<div id="app">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-7  mt-5 mx-auto">
-          <h3 class="text-center">NICSI Payment Calculator</h3>
-        </div>
-        <div class="col-6 mx-auto bg-light border border-success mt-3">
+        <div class="col-md-5 mx-auto bg-light border border-success mt-3">
+          <h3 class="text-center">NICSI Payment Calculator (CTC to PI Amount)</h3>
           <table class="table">
             <tr>
               <td class="fw-bold">Monthly In Hand Salery</td>
@@ -39,7 +37,7 @@
               </td>
             </tr>
             <tr  class="fw-bold">
-              <td>Monthly Rate <span class="text-secondary">(+{{vendor_commission}}% vendor commission)</span>:</td>
+              <td>Monthly Empanneled Rate <span class="text-secondary">(+{{vendor_commission}}% vendor commission)</span>:</td>
               <td>{{monthlyRate}}</td>
             </tr>
             <tr  class="fw-bold">
@@ -52,13 +50,116 @@
             </tr>
           </table>
         </div>
+        <div class="col-md-5 mx-auto bg-light border border-success mt-3">
+          <h3 class="text-center">NICSI Payment Calculator (Empanneled Rate to CTC)</h3>
+          <table class="table">
+            <tr>
+              <td class="fw-bold">Monthly Empanneled Rate</td>
+              <td><input type="number" v-model="empanneled_rate" class="w-50"></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Vendor Commission</td>
+              <td>
+                <select name="" id="" v-model="cal2_vendor_commission" class="w-50">
+                  <option value="7.9">7.9% (Core)</option>
+                  <option value="4.39">4.39% (Support)</option>
+                </select>
+              </td>
+            </tr>
+            <tr  class="fw-bold">
+              <td>CTC <span class="text-secondary">(-{{cal2_vendor_commission}}% vendor commission)</span>:</td>
+              <td>{{monthlyCtc}}</td>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <div class="row">
         <div class="col-7 mt-5 mx-auto">
-          <h3 class="text-center">NICSI Manpower Rate</h3>
+          <h3 class="text-center">NICSI Manpower Rate (Updated)</h3>
         </div>
-        <div class="col-10 mx-auto mt-3">
+        <div class="col-12 mx-auto mt-3">
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">New (Rs.)</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (0 to less than 2 years relevant experience)</td>
+                <td>34,770</td>
+                <td>36,170</td>
+                <td>37,560</td>
+                <td>38,950</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (2 to less than 4 years relevant experience)</td>
+                <td>37,580</td>
+                <td>39,090</td>
+                <td>40,590</td>
+                <td>42,090</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (4 to less than 6 years relevant experience)</td>
+                <td>40,630</td>
+                <td>42,260</td>
+                <td>43,890</td>
+                <td>45,510</td>
+              </tr>
+              <tr>
+                <td>Software Application Support Engineer (6 years & Above relevant experience)</td>
+                <td>43,880</td>
+                <td>45,640</td>
+                <td>47,400</td>
+                <td>49,150</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table">
+            <tbody>
+              <tr class="bg-dark text-white">
+                <th width="70%">Position</th>
+                <th width="10%">New (Rs.)</th>
+                <th width="10%">1st Year (Rs.)</th>
+                <th width="10%">2nd Year (Rs.)</th>
+                <th width="10%">3rd Year (Rs.)</th>
+              </tr>
+              <tr>
+                <td>Senior Software Application Support Engineer 3 to less than 5 years relevant experience with Certification or 5 to less than 7 years relevant experience without Certification</td>
+                <td>51,190</td>
+                <td>53,240</td>
+                <td>55,290</td>
+                <td>57,340</td>
+              </tr>
+              <tr>
+                <td>Senior Software Application Support Engineer 5 to less than 7 years relevant experience with Certification or 7 to less than 9 years relevant experience without Certification</td>
+                <td>55,250</td>
+                <td>57,460</td>
+                <td>59,670</td>
+                <td>61,880</td>
+              </tr>
+              <tr>
+                <td>Senior Software Application Support Engineer 7 to less than 9 years relevant experience with Certification or 9 to less than 11 years relevant experience without Certification</td>
+                <td>59,630</td>
+                <td>62,020</td>
+                <td>64,410</td>
+                <td>66,790</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-7 mt-5 mx-auto">
+          <h3 class="text-center">NICSI Manpower Rate(Expired)</h3>
+        </div>
+        <div class="col-12 mx-auto mt-3">
           <table class="table">
             <tbody>
               <tr class="bg-dark text-white">
@@ -186,7 +287,10 @@
           total_months: 1,
           total_manpower: 1,
           workOrderAmount: 0,
-          vendor_commission: 4.39
+          vendor_commission: 4.39,
+
+          cal2_vendor_commission: 4.39,
+          empanneled_rate: 55451.97
 	      }
 	    },
       computed: {
@@ -199,6 +303,9 @@
         },
         monthlyRate(){
           return (this.monthly_salery+this.monthly_salery*this.vendor_commission/100).toFixed(2);
+        },
+        monthlyCtc(){
+          return (100*this.empanneled_rate/(100+this.cal2_vendor_commission)).toFixed(2)
         }
       }
 	  }).mount('#app')
